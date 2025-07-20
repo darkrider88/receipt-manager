@@ -14,7 +14,7 @@ export interface IAuthResponse {
 }
 
 
-export interface ReceiptLine {
+export interface IReceiptLine {
   /** European Article Number - the barcode of item purchased */
   ean?: string;
 
@@ -38,12 +38,12 @@ export interface ReceiptLine {
 }
 
 
-export interface Receipt {
+export interface IReceipt {
   /** The time of purchase */
   purchaseTimeUTC: Date;
 
   /** The receipts lines. */
-  receiptLines: ReceiptLine[];
+  receiptLines: IReceiptLine[];
 
   /** ID used to identify the receipt by the source. */
   sourceReceiptId: string;

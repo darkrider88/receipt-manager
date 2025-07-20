@@ -1,3 +1,4 @@
+import type { IReceipt } from "../types/interfaces";
 import { BASE_URL } from "../utils/constants";
 import { Authenticator } from "./authenticator.service";
 import { HttpClient } from "./http-client.service";
@@ -21,11 +22,11 @@ export class ReceiptService {
         return this.instance;
     }
 
-    async getReceipt(username: string, password: string, receiptId: string) {
+    async getReceipt(username: string, password: string, receiptId: string): Promise<IReceipt> {
         try {
             const token = await this.getAuthToken(username, password);
             const url = this.getReceiptURL(receiptId);
-            const res = HttpClient(url, {
+            const res = HttpClient<IReceipt>(url, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,6 +36,7 @@ export class ReceiptService {
             });
             return res; 
         } catch (error) {
+            console.log('****')
             console.log('Error while fetching the receipt', error);
             throw new Error('Error while fetching the receipt');
         }
